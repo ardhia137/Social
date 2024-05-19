@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">Social</string>
+    <string name="add">Add</string>
+    <string name="camera">Camera</string>
+    <string name="galery">Galery</string>
+    <string name="description">Description</string>
+    <string name="posting">Posting</string>
+    <string name="detail">Detail</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="don_t_have_an_account">Don\'t have an account?</string>
+    <string name="register">Register</string>
+    <string name="profile">Profile</string>
+    <string name="logout">Logout</string>
+    <string name="name">Name</string>
+    <string name="already_have_an_account">Already have an account?</string>
+</resources>
