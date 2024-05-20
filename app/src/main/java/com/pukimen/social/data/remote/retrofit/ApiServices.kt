@@ -1,6 +1,7 @@
 package com.pukimen.social.data.remote.retrofit
 
 import com.pukimen.social.data.remote.response.AllStoryResponse
+import com.pukimen.social.data.remote.response.ListStoryItem
 import com.pukimen.social.data.remote.response.LoginResponse
 import com.pukimen.social.data.remote.response.PostStoryResponse
 import com.pukimen.social.data.remote.response.RegisterResponse
@@ -24,8 +25,16 @@ interface ApiService {
     ): Call<LoginResponse>
 
     @GET("stories")
-    fun getAllStory(
-        @Header("Authorization") token: String
+    suspend fun getAllStory(
+        @Header("Authorization") token: String,
+        @Query("page") page: Int,
+        @Query("size") size: Int
+    ): AllStoryResponse
+
+    @GET("stories")
+    fun getLocationStory(
+        @Header("Authorization") token: String,
+        @Query("location") location: Int?
     ): Call<AllStoryResponse>
 
     @Multipart

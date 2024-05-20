@@ -29,7 +29,7 @@ class ViewModelFactory private constructor(private val loginRepository: AuthRepo
         fun getInstance(context: Context): ViewModelFactory =
             instance ?: synchronized(this) {
                 val authRepository = Injection.provideAuthRepository(context)
-                val stroyRepository = Injection.provideStroyRepository()
+                val stroyRepository = Injection.provideStroyRepository(context)
                 instance ?: ViewModelFactory(authRepository, stroyRepository)
             }.also { instance = it }
     }

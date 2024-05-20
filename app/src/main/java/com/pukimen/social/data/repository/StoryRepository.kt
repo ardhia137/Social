@@ -6,6 +6,12 @@ import android.net.Uri
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.PagingData
+import androidx.paging.liveData
+import com.pukimen.social.data.StoryPagingSource
+import com.pukimen.social.data.local.UserPreference
 import com.pukimen.social.data.model.StoryModel
 import com.pukimen.social.data.remote.response.AllStoryResponse
 import com.pukimen.social.data.remote.response.ListStoryItem
@@ -23,13 +29,26 @@ import retrofit2.Response
 
 class StroyRepository private constructor(
     private val apiService: ApiService,
+    private val userPreference: UserPreference
 ) {
     private val results = MediatorLiveData<Results<List<StoryModel>>>()
     private val resultsPost = MediatorLiveData<Results<PostStoryResponse>>()
 
-    fun getAllStory(token: String): LiveData<Results<List<StoryModel>>> {
+
+
+    fun getAllStory(): LiveData<PagingData<ListStoryItem>> {
+        return Pager(
+            config = PagingConfig(
+                pageSize = 5
+            ),
+            pagingSourceFactory = {
+                StoryPagingSource(apiService,userPreference)
+            }
+        ).liveData
+    }
+    fun getLocationStory(token: String,location:Int): LiveData<Results<List<StoryModel>>> {
         results.value = Results.Loading
-        val client = apiService.getAllStory("Bearer $token")
+        val client = apiService.getLocationStory("Bearer $token",location)
         client.enqueue(object : Callback<AllStoryResponse> {
             override fun onResponse(call: Call<AllStoryResponse>, response: Response<AllStoryResponse>) {
                 if (response.isSuccessful) {
@@ -113,9 +132,10 @@ class StroyRepository private constructor(
 
         fun getInstance(
             apiService: ApiService,
+            userPreference: UserPreference
         ): StroyRepository =
             instance ?: synchronized(this) {
-                instance ?: StroyRepository(apiService)
+                instance ?: StroyRepository(apiService,userPreference)
             }.also { instance = it }
     }
 }

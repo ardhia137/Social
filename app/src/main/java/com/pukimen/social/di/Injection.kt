@@ -15,8 +15,9 @@ object Injection {
         return AuthRepository.getInstance(apiService,  pref)
     }
 
-    fun provideStroyRepository(): StroyRepository {
+    fun provideStroyRepository(context: Context): StroyRepository {
         val apiService = ApiConfig.getApiService()
-        return StroyRepository.getInstance(apiService)
+        val pref = UserPreference.getInstance(context.dataStore)
+        return StroyRepository.getInstance(apiService,pref)
     }
 }

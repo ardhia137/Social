@@ -15,4 +15,6 @@
     <string name="logout">Logout</string>
     <string name="name">Name</string>
     <string name="already_have_an_account">Already have an account?</string>
+    <string name="title_activity_maps">MapsActivity</string>
+    <string name="retry">Coba lagi</string>
 </resources>
