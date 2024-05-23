@@ -150,7 +150,7 @@ class AddStoryActivity : AppCompatActivity() {
     }
 
     private fun postStory(){
-        val description = binding.descriptionEditText.text.toString().replace("\"", "")
+        val description = binding.descriptionEditText.text.toString().trim()
 
         val factory: ViewModelFactory = ViewModelFactory.getInstance(this)
         val viewModel: StoryViewModel by viewModels {

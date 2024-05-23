@@ -68,6 +68,7 @@ import org.mockito.junit.MockitoJUnitRunner
                 updateCallback = noopListUpdateCallback,
                 workerDispatcher = Dispatchers.Main,
             )
+            println(differ)
             differ.submitData(actualQuote)
             Assert.assertEquals(0, differ.snapshot().size)
         }

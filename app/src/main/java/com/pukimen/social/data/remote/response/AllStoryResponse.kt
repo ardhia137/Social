@@ -1,6 +1,8 @@
 package com.pukimen.social.data.remote.response
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
 
 data class AllStoryResponse(
 
@@ -13,7 +15,7 @@ data class AllStoryResponse(
 	@field:SerializedName("message")
 	val message: String? = null
 )
-
+@Parcelize
 data class ListStoryItem(
 
 	@field:SerializedName("photoUrl")
@@ -29,11 +31,11 @@ data class ListStoryItem(
 	val description: String? = null,
 
 	@field:SerializedName("lon")
-	val lon: Any? = null,
+	val lon: String? = null,
 
 	@field:SerializedName("id")
 	val id: String? = null,
 
 	@field:SerializedName("lat")
-	val lat: Any? = null
-)
+	val lat: String? = null
+):Parcelable

@@ -23,6 +23,7 @@ import com.pukimen.social.utils.uriToFile
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
+import okhttp3.RequestBody.Companion.toRequestBody
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -85,7 +86,8 @@ class StroyRepository private constructor(
                 imageFile.name,
                 requestImageFile
             )
-            val client = apiService.postStory("Bearer $token",multipartBody,description)
+            val requestDescription = description.toRequestBody("text/plain".toMediaType())
+            val client = apiService.postStory("Bearer $token",multipartBody,requestDescription,)
             client.enqueue(object : Callback<PostStoryResponse> {
             override fun onResponse(call: Call<PostStoryResponse>, response: Response<PostStoryResponse>) {
                 if (response.isSuccessful) {

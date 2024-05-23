@@ -6,6 +6,7 @@ import com.pukimen.social.data.remote.response.LoginResponse
 import com.pukimen.social.data.remote.response.PostStoryResponse
 import com.pukimen.social.data.remote.response.RegisterResponse
 import okhttp3.MultipartBody
+import okhttp3.RequestBody
 import retrofit2.Call
 import retrofit2.http.*
 interface ApiService {
@@ -42,7 +43,7 @@ interface ApiService {
     fun postStory(
         @Header("Authorization") token: String,
         @Part photo: MultipartBody.Part,
-        @Part("description") description: String,
+        @Part("description") description: RequestBody
     ): Call<PostStoryResponse>
 
 

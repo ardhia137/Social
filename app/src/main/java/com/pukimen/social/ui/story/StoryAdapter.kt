@@ -1,5 +1,7 @@
 package com.pukimen.social.ui.story
+import android.content.ContentValues
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
@@ -20,8 +22,9 @@ class StroyAdapter : PagingDataAdapter<ListStoryItem, StroyAdapter.MyViewHolder>
         holder.bind(story!!)
         holder.itemView.setOnClickListener {
             val intent = Intent(holder.itemView.context, DetailStoryActivity::class.java)
-            // Kirim data yang diperlukan ke DetailStoryActivity
+            intent.putExtra(DetailStoryActivity.EXTRA_STORY,story)
             holder.itemView.context.startActivity(intent)
+            Log.e(ContentValues.TAG, "check: ${story}")
         }
     }
 

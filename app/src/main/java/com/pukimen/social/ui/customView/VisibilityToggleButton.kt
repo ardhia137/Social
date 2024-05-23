@@ -2,7 +2,9 @@ package com.pukimen.social.ui.customView
 
 import android.content.Context
 import android.graphics.drawable.Drawable
+import android.text.Editable
 import android.text.InputType
+import android.text.TextWatcher
 import android.util.AttributeSet
 import android.util.Log
 import android.view.MotionEvent
@@ -12,11 +14,19 @@ import com.pukimen.social.R
 
 class VisibilityToggleButton : AppCompatEditText {
 
-    constructor(context: Context) : super(context)
-    constructor(context: Context, attrs: AttributeSet) : super(context, attrs)
+    private val minLength = 8  // Panjang minimum password
 
-    init {
+    constructor(context: Context) : super(context) {
+        init()
+    }
+
+    constructor(context: Context, attrs: AttributeSet) : super(context, attrs) {
+        init()
+    }
+
+    private fun init() {
         initToggleListener()
+        addTextChangedListener(passwordTextWatcher)
     }
 
     private fun initToggleListener() {
@@ -55,5 +65,21 @@ class VisibilityToggleButton : AppCompatEditText {
             inputType = InputType.TYPE_TEXT_VARIATION_VISIBLE_PASSWORD
             setCompoundDrawablesRelativeWithIntrinsicBounds(null, null, visibilityToggleOn, null)
         }
+    }
+
+    private val passwordTextWatcher = object : TextWatcher {
+        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+
+        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+            s?.let {
+                if (it.length < minLength) {
+                    error = "Password must be at least $minLength characters long"
+                } else {
+                    error = null
+                }
+            }
+        }
+
+        override fun afterTextChanged(s: Editable?) {}
     }
 }

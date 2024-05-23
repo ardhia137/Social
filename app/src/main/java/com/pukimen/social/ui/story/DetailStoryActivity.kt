@@ -8,6 +8,7 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.pukimen.social.data.model.StoryModel
+import com.pukimen.social.data.remote.response.ListStoryItem
 import com.pukimen.social.databinding.ActivityDetailStoryBinding
 
 class DetailStoryActivity : AppCompatActivity() {
@@ -17,10 +18,10 @@ class DetailStoryActivity : AppCompatActivity() {
         binding = ActivityDetailStoryBinding.inflate(layoutInflater)
         setContentView(binding.root)
         val story = if (Build.VERSION.SDK_INT >= 33){
-            intent.getParcelableExtra<StoryModel>(EXTRA_STORY, StoryModel::class.java)
+            intent.getParcelableExtra<ListStoryItem>(EXTRA_STORY, ListStoryItem::class.java)
         }else{
             @Suppress("DEPRECATION")
-            intent.getParcelableExtra<StoryModel>(EXTRA_STORY)
+            intent.getParcelableExtra<ListStoryItem>(EXTRA_STORY)
         }
 
         binding.tvDetailName.text = story?.name

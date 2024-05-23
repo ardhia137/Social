@@ -34,7 +34,6 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         binding = ActivityMapsBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         val mapFragment = supportFragmentManager
             .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
@@ -56,7 +55,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
                             binding.progressBar.visibility = View.GONE
                             newsData = result.data
                             Log.e(TAG, "News data loaded: $newsData")
-                            addManyMarker() // Pemanggilan disini setelah mendapatkan data
+                            addManyMarker() 
                         }
                         is Results.Error -> {
                             binding.progressBar.visibility = View.GONE

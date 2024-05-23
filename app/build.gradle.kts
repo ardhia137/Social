@@ -77,4 +77,6 @@ dependencies {
     testImplementation("org.mockito:mockito-core:3.12.4")
     testImplementation("org.mockito:mockito-inline:3.12.4")
 
+    implementation("androidx.room:room-paging:2.4.0-rc01")
+
 }

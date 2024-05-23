@@ -8,7 +8,6 @@ object DataDummy {
         val items: MutableList<ListStoryItem> = arrayListOf()
         for (i in 0..100) {
             val story = ListStoryItem(
-
                 "createdAt + $i",
                 "name $i",
                 "description $i",
